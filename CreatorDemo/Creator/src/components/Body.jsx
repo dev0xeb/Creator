@@ -8,7 +8,7 @@ import mutantMercnary from '../images/MutantMercnary.jpg'
 import scanvenger from '../images/Scanvenger.jpg'
 import shadowSamurai from '../images/shadowSmaurai.jpg'
 import spaceRanger from '../images/spaceRanger.jpg'
-import valkeylie from '../images/valkeylie.jpg'
+import valkeylie from '../images/Valkeylie.jpg'
 import '../index.css'
 
 const Body = () => {
