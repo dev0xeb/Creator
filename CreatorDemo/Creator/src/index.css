@@ -1,11 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body{
+body {
   background-color: rgb(194, 187, 187);
 }
-.banner{
+
+.banner {
   width: 100%;
   height: 100vh;
   text-align: center;
@@ -13,48 +10,50 @@ body{
   position: relative;
 }
 
-.banner .slider{
+/* 3D Slider */
+.banner .slider {
   position: absolute;
-  width: 200px;
-  height: 250px;
+  width: 150px; /* Smaller for mobile */
+  height: 200px; /* Smaller for mobile */
   top: 10%;
-  left: calc(50% - 100px);
+  left: 50%;
+  transform: translateX(-50%) perspective(800px) rotateX(-16deg);
   transform-style: preserve-3d;
-  transform: perspective(1000px);
   animation: autoRun 20s linear infinite;
   z-index: 2;
 }
 
-@keyframes autoRun{
-  from{
-    transform: perspective(1000px) rotateX(-16deg)rotateY(0deg);
-  } to{
-    transform: perspective(1000px) rotateX(-16deg)rotateY(360deg);
+@keyframes autoRun {
+  from {
+    transform: translateX(-50%) perspective(800px) rotateX(-16deg) rotateY(0deg);
+  }
+  to {
+    transform: translateX(-50%) perspective(800px) rotateX(-16deg) rotateY(360deg);
   }
 }
 
-.banner .slider .item{
+.banner .slider .item {
   position: absolute;
-  inset: 0 0 0 0;
-  transform: 
-    rotateY(calc( (var(--position) - 1 )*(360/var(--quantity))* 1deg))
-    translateZ(600px);
+  inset: 0;
+  transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+    translateZ(400px); /* Smaller translateZ for mobile */
 }
 
-.banner .slider .item img{
-  width: 70%;
-  height: 70%;
+.banner .slider .item img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
-.banner .content{
+/* Content Section */
+.banner .content {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   width: min(1400px, 100vw);
   height: max-content;
-  padding-bottom: 100px;
+  padding-bottom: 50px; /* Smaller padding for mobile */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -62,45 +61,70 @@ body{
   z-index: 1;
 }
 
-
-.banner .content h1{
-  font-family:'Times New Roman', Times, serif;
-  font-size: 100px;
+.banner .content h1 {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 3rem; /* Smaller font size for mobile */
   line-height: 1em;
   font-weight: 900;
-  color: #25283B;
+  color: #25283b;
   position: relative;
 }
 
-.banner .content h1::after{
+.banner .content h1::after {
   position: absolute;
-  inset: 0 0 0 0;
+  inset: 0;
   content: attr(data-content);
   z-index: 2;
   -webkit-text-stroke: 2px #d2d2d2;
   color: transparent;
 }
 
-.banner .content .author{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.banner .content .author {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: right;
   max-width: 200px;
   font-weight: 600;
 }
 
-.banner .content h2{
-  font-size: 3em;
+.banner .content h2 {
+  font-size: 1.5rem; /* Smaller font size for mobile */
 }
 
-.banner .content .model{
+.banner .content .model {
   background-image: url('../src/images/bg-removebg-preview.png');
   width: 100%;
-  height: 75vh;
+  height: 50vh; /* Smaller height for mobile */
   position: absolute;
   bottom: 0;
   left: 0;
-  background-size: auto 130%;
+  background-size: auto 100%;
   background-repeat: no-repeat;
   background-position: top center;
   z-index: 1;
+}
+
+/* Media Queries for Larger Screens */
+@media (min-width: 768px) {
+  .banner .slider {
+    width: 200px; /* Larger for tablets and desktops */
+    height: 250px; /* Larger for tablets and desktops */
+    transform: translateX(-50%) perspective(1000px) rotateX(-16deg);
+  }
+
+  .banner .slider .item {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+      translateZ(600px); /* Larger translateZ for tablets and desktops */
+  }
+
+  .banner .content h1 {
+    font-size: 6rem; /* Larger font size for tablets and desktops */
+  }
+
+  .banner .content h2 {
+    font-size: 3rem; /* Larger font size for tablets and desktops */
+  }
+
+  .banner .content .model {
+    height: 75vh; /* Larger height for tablets and desktops */
+  }
 }
